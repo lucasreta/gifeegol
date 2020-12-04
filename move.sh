@@ -26,7 +26,7 @@ do
       loop=0
       while (( loop < 30 ))
       do
-        GIT_COMMITTER_DATE="$commit_date $((10 + RANDOM % 14)):$((10 + RANDOM % 49)):$((10 + RANDOM % 49))" git commit --date "$commit_date $((10 + RANDOM % 14)):$((10 + RANDOM % 49)):$((10 + RANDOM % 49))" --allow-empty --allow-empty-message --quiet
+        GIT_COMMITTER_DATE="$commit_date $((10 + RANDOM % 14)):$((10 + RANDOM % 49)):$((10 + RANDOM % 49))" git commit --date "$commit_date $((10 + RANDOM % 14)):$((10 + RANDOM % 49)):$((10 + RANDOM % 49))" -m "" --allow-empty --allow-empty-message --quiet
         ((loop++))
       done
     fi
@@ -35,4 +35,4 @@ do
   first_col_date=$(date --date="${first_col_date} +1 day" +%Y-%m-%d)
 done < "$input"
 
-curl -i -u "$USERNAME:$ACCESS_TOKEN" --header "Content-Type: application/json" --request PATCH --data "{'name': '$REPOSITORY', 'default_branch': '$new_branch'}"  "https://api.github.com/repos/$USERNAME/$REPOSITORY"
+curl -i -u "$USERNAME:$ACCESS_TOKEN" --header "Content-Type: application/json" --request PATCH --data "{\"name\": \"$REPOSITORY\", \"default_branch\": \"$new_branch\"}"  "https://api.github.com/repos/$USERNAME/$REPOSITORY"
