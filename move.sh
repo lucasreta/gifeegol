@@ -1,5 +1,9 @@
 #!/bin/bash
 
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+cd $DIR
+
 ./cligol/cligol
 
 weekday=`date +"%w"`
@@ -14,7 +18,7 @@ first_col_date=$(date --date="${today} -${weekday} day -364 day" +%Y-%m-%d)
 RANDOM=$(date +%s%N | cut -b10-19)
 new_branch=branch-$today-$RANDOM
 
-git checkout v1.0.0
+git checkout reset_point
 
 git checkout -b $new_branch
 
