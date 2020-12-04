@@ -14,6 +14,8 @@ first_col_date=$(date --date="${today} -${weekday} day -364 day" +%Y-%m-%d)
 RANDOM=$(date +%s%N | cut -b10-19)
 new_branch=branch-$today-$RANDOM
 
+git checkout v1.0.0
+
 git checkout -b $new_branch
 
 input="cligol/data/board.txt"
@@ -24,7 +26,7 @@ do
     if [ $i -eq 1 ]
     then
       loop=0
-      while (( loop < 30 ))
+      while (( loop < 40 ))
       do
         GIT_COMMITTER_DATE="$commit_date $((10 + RANDOM % 14)):$((10 + RANDOM % 49)):$((10 + RANDOM % 49))" git commit --date "$commit_date $((10 + RANDOM % 14)):$((10 + RANDOM % 49)):$((10 + RANDOM % 49))" -m "" --allow-empty --allow-empty-message --quiet
         ((loop++))
