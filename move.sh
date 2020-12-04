@@ -35,4 +35,6 @@ do
   first_col_date=$(date --date="${first_col_date} +1 day" +%Y-%m-%d)
 done < "$input"
 
+git push origin $new_branch
+
 curl -i -u "$USERNAME:$ACCESS_TOKEN" --header "Content-Type: application/json" --request PATCH --data "{\"name\": \"$REPOSITORY\", \"default_branch\": \"$new_branch\"}"  "https://api.github.com/repos/$USERNAME/$REPOSITORY"
